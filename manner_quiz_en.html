@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Quiz of ONSEN Manner</title>
+</head>
+<body bgcolor="#ffffec">
+    
+<h1>Quiz of ONSEN Manner</h1>
+<hr>
+<h2>10 Questions</h2>
+<div id="text_q"></div>
+<h2>What do you think?</h2>
+<div id="text_s"></div>
+<h2>Answer</h2>
+<div id="text_a"></div>
+
+<script type="text/javascript">
+//問題と解答
+qa = new Array();
+qa[0] = ["Please be ingested water before you take a bath.","I think so.","I don't think so.",1,"Body water is lost by the bath. Let's drink a glass of water before you take a bath."];
+qa[1] = ["You wash your body before you take a bath.","I think so.","I don't think so.",1,"Let's wash the body before entering the tub. Let's wash firmly in order from the tip of the foot, soap. Please do not remain in the body."];
+qa[2] = ["Adult, should have the responsibility to children's behavior.","I think so.","I don't think so.",1,"Your child, to avoid injury by, for example, run around, adult, please supervision."];
+qa[3] = ["That you wash in the bath is not permitted.","I think so.","I don't think so.",1,"That you wash in the bath is not permitted."];
+qa[4] = ["The shower, please use it so as not to disturb people around.","I think so.","I don't think so.",1,"Please do not use the shower to get up. Please do not knocked off a splash around."];
+qa[5] = ["Waist Go into your hot water first.","I think so.","I don't think so.",1,"Waist Let's go slowly to the bath first. Let's then warm the body slowly."];
+qa[6] = ["Let us NOT taking a bath on After drinking alchole.","I think so.","I don't think so.",1,"Let us not taking a bath on After drinking alchole."];
+qa[7] = ["In a locker room, let's remove all the dress.","I think so.","I don't think so.",1,"Take off all your clothes in the dressing room, I'll put in a locker for bathroom basket. Underwear also let go and take off from all."];
+qa[8] = ["Body is getting wet, please do not enter the dressing room.","I think so.","I don't think so.",1,"Body is getting wet, please do not enter the dressing room."];
+qa[9] = ["Let's break after bathing.","I think so.","I don't think so.",1,"Energy is consumed while bathing. To any change in blood pressure, let's rest slowly after bathing."];
+qa[10] = ["Do not do bathing when physical condition is not good.","I think so.","I don't think so.",1,"Do not do bathing when physical condition is not good."];
+qa[11] = ["DO NOT take the place of washing space.","I think so.","I don't think so.",1,"And to leave it on your stuff in the scullery Let us not."];
+qa[12] = ["Long time, soak in the hot water I'll quit.","I think so.","I don't think so.",1,"It is not good for the health for a long time, it is too soak in hot water. Let's to prevent it from beating may become faster, sweat and out a lot."];
+qa[13] = ["You are NOT allowed to put a towel in the tub.","I think so.","I don't think so.",1,"You are not allowed to put a towel in the tub."];
+qa[14] = ["Please tale the hot water in the body before taking a bath.","I think so.","I don't think so.",1,"Even if you can not wash the body before taking a bath, hot water, let your body subjected to the hot water always. It is necessary to get used to the temperture of the hot water body."];
+qa[15] = ["I recommend you to STOP taking a shower after exiting the bathtub.","I think so.","I don't think so.",1,"It is suggested that you do not wash away the components of hotspring attached to the skin. However, people of sensitive skin, please wash well."];
+qa[16] = ["Go to restroom for bathing or before.","I think so.","I don't think so.",1,"Go to restroom for bathing or before."];
+qa[17] = ["To quiet in the bathhouse.","I think so.","I don't think so.",1,"Let us not that speal loudly in the bath. The bath is slippery, it is suggensted that you do not or running."];
+qa[18] = ["Let's stop bringing valuables to a no key's locker room.","I think so.","I don't think so.",1,"Let's keep valuables in the safe of the room without bringing to a locker room."];
+qa[19] = ["Eating and drinking of in the bath house is forbidden.","I think so.","I don't think so.",1,"Eating and drinking of in the bath house is forbidden."];
+qa[20] = ["Long Hair will prevent you from entering the bathtub.","I think so.","I don't think so.",1,"Hair Let bathing with or tie, for example, wrap a towel."];
+qa[21] = ["It is NOT jump into bathtub.","I think so.","I don't think so.",1,"Swim - jumpning - that dive is prohibited acts."];
+qa[22] = ["Even after bathing, let's replenish moisture.","I think so.","I don't think so.",1,"Moisture will be lost by sweating and diuretic effect by bathing. After bathing, let's replenish moisture."];
+qa[23] = ["You take a bath immediately after a meal will help you quit.","I think so.","I don't think so.",1,"After a meal, blood will go to the location of the organ for digestion and absorption. After placing a while time after a meal, let's take a bath."];
+qa[24] = ["DON'T be ingested water before you take a bath","I think so.","I don't think so.",2,"Body water is lost by the bath. Let's drink a glass of water before you take a bath."];
+qa[25] = ["You DON'T need washing your body before you take a bath.","I think so.","I don't think so.",2,"Let's wash the body before entering the tub. Let's wash firmly in order from the tip of the foot, soap. Please do not remain in the body."];
+qa[26] = ["Adult can leave their children freedom in there.","I think so.","I don't think so.",2,"Your child, to avoid injury by, for example, run around, adult, please supervision."];
+qa[27] = ["We can wash everything in the bath.","I think so.","I don't think so.",2,"That you wash in the bath is not permitted."];
+qa[28] = ["The shower, you can use it so as to disturb people around.","I think so.","I don't think so.",2,"Please do not use the shower to get up. Please do not knocked off a splash around."];
+qa[29] = ["You have to go into your hot water first.","I think so.","I don't think so.",2,"Waist Let's go slowly to the bath first. Let's then warm the body slowly."];
+qa[30] = ["Let us taking a bath on After drinking alchole.","I think so.","I don't think so.",2,"Let us not taking a bath on After drinking alchole."];
+qa[31] = ["In a locker room, let's change to the swimwear.","I think so.","I don't think so.",2,"Take off all your clothes in the dressing room, I'll put in a locker for bathroom basket. Underwear also let go and take off from all."];
+qa[32] = ["You can enter the dressing room, even if your body is getting wet.","I think so.","I don't think so.",2,"Body is getting wet, please do not enter the dressing room."];
+qa[33] = ["Let's exercise after bathing.","I think so.","I don't think so.",2,"Energy is consumed while bathing. To any change in blood pressure, let's rest slowly after bathing."];
+qa[34] = ["You have to do bathing when physical condition is not good.","I think so.","I don't think so.",2,"Do not do bathing when physical condition is not good."];
+qa[35] = ["You have to take the place of washing space.","I think so.","I don't think so.",2,"And to leave it on your stuff in the scullery Let us not."];
+qa[36] = ["You have to stay in the hot water as long as possible.","I think so.","I don't think so.",2,"It is not good for the health for a long time, it is too soak in hot water. Let's to prevent it from beating may become faster, sweat and out a lot."];
+qa[37] = ["You are allowed to put a towel in the tub.","I think so.","I don't think so.",2,"You are not allowed to put a towel in the tub."];
+qa[38] = ["DON'T tale the hot water in the body before taking a bath.","I think so.","I don't think so.",2,"Even if you can not wash the body before taking a bath, hot water, let your body subjected to the hot water always. It is necessary to get used to the temperture of the hot water body."];
+qa[39] = ["I recommend you to take a shower after exiting the bathtub.","I think so.","I don't think so.",2,"It is suggested that you do not wash away the components of hotspring attached to the skin. However, people of sensitive skin, please wash well."];
+qa[40] = ["DON'T go to restroom for bathing or before.","I think so.","I don't think so.",2,"Go to restroom for bathing or before."];
+qa[41] = ["DON'T be quiet in the bathhouse.","I think so.","I don't think so.",2,"Let us not that speal loudly in the bath. The bath is slippery, it is suggensted that you do not or running."];
+qa[42] = ["Let's bringing valuables to a no key's locker room.","I think so.","I don't think so.",2,"Let's keep valuables in the safe of the room without bringing to a locker room."];
+qa[43] = ["Let's eat and drink in the bath house.","I think so.","I don't think so.",2,"Eating and drinking of in the bath house is forbidden."];
+qa[44] = ["Long Hair will NOT prevent you from entering the bathtub.","I think so.","I don't think so.",2,"Hair Let bathing with or tie, for example, wrap a towel."];
+qa[45] = ["We can jump into bathtub.","I think so.","I don't think so.",2,"Swim - jumpning - that dive is prohibited acts."];
+qa[46] = ["No replenish moisture after bathing.","I think so.","I don't think so.",2,"Moisture will be lost by sweating and diuretic effect by bathing. After bathing, let's replenish moisture."];
+qa[47] = ["You take a bath immediately after a meal.","I think so.","I don't think so.",2,"After a meal, blood will go to the location of the organ for digestion and absorption. After placing a while time after a meal, let's take a bath."];
+
+
+//初期設定
+//count = 0; //問題番号
+
+q_sel = 2; //選択肢の数
+q_max = 10; //出題数
+
+setReady();
+//最初の問題
+//quiz();
+
+//初期設定
+function setReady() {
+	count = 0; //問題番号
+	ansers = new Array(); //解答記録
+	
+	//最初の問題
+	quiz();
+}
+
+//問題表示
+function quiz() 
+{
+    var s,n;
+	quiz_rnd = Math.floor(Math.random() * 47); //0~47の生成
+    //問題
+	document.getElementById("text_q").innerHTML ="Qestion." + (count + 1) + "：  "+ qa[quiz_rnd][0];
+    
+    //選択肢
+	s = "";
+	for (n=1;n<=q_sel;n++) {
+		if (qa[quiz_rnd][n] != "") {
+			s += "【<a href='javascript:anser(" + n + ")'>" + n + "： " + qa[quiz_rnd][n] + "</a>】";
+		}
+	}
+	document.getElementById("text_s").innerHTML = s;
+}
+//解答表示
+function anser(num) 
+{
+	var s;
+	s = "Qestion." + (count + 1) + "：";
+	//答え合わせ
+	if (num == qa[quiz_rnd][q_sel + 1]) {
+		//正解
+		ansers[count] = "GOOD!";
+       
+        
+	} else {
+		ansers[count] = "Bad...";
+	}
+	s += ansers[count] + "Answer is "+ "《" +qa[quiz_rnd][num] + "》" ;
+	document.getElementById("text_a").innerHTML = s;
+    //次の問題を表示
+	count++;
+	if (count < q_max) {
+		quiz();
+	} else 
+    {
+		//終了
+		s = "<table border='2'><caption>成績発表</caption>";
+		//1行目
+		s += "<tr><th>Question</th>";
+		//for (n=0;n<qa.length;n++) {
+		for (n=0;n<10;n++) {
+        	s += "<th>" + (n+1) + "</th>";
+		}
+		s += "</tr>";
+		//2行目
+		s += "<tr><th>Score</th>";
+		//for (n=0;n<qa.length;n++) {
+        for (n=0;n<10;n++) {
+			s += "<td>" + ansers[n] + "</td>";
+		}
+		s += "</tr>";
+		s += "</table>";
+        document.getElementById("text_q").innerHTML = s;
+        //次の選択肢
+		s = "【<a href='javascript:history.back()'>Go back to Top page</a>】";
+		//s += "【<a href='javascript:setReady()'>同じ問題を最初から</a>】";
+		s += "【<a href=''>Next 10 questinos!</a>】";
+		document.getElementById("text_s").innerHTML = s;
+	}
+}
+
+</script>
+</body>
+</html>

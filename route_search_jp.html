@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>ルート検索 - Sapporo ONSEN Info.</title>
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.min.css"/>
+<link rel="stylesheet" href="SlickGrid-master/slick.grid.css"/>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script src="jquery.event.drag-2.2/jquery.event.drag-2.2.js"></script>
+<script src="jquery.event.drop-2.2/jquery.event.drop-2.2.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+<script src="SlickGrid-master/slick.core.js"></script>
+<script src="SlickGrid-master/slick.grid.js"></script>
+<script src="./leaflet/leaflet-routing-machine.min.js"></script>
+<link href="./leaflet/leaflet-routing-machine.css" rel="stylesheet"/>
+<link href="./css/stylesheet.css" rel="stylesheet"/>
+<link rel="stylesheet" href="leaflet-routing-machine.css" />
+<script src="leaflet-routing-machine.js"></script>
+<style>
+  body {padding: 0; margin: 0}
+  html, body, #map {height: 80%; width: 100%;}
+</style>
+</head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="">
+<h1>ルート検索 Map</h1>
+
+<div id="map"></div>
+<h2>使用方法</h2>
+<h4>1. 地図上をクリックしスタート地点とゴール地点を指定してください。</h4>
+<h4>2. 2点クリックしたら"ルート検索"(Route Search)ボタンを押してください。車の場合のルート検索が表示されます。</h4>
+<div><input type="button" onclick="routeDescribe()" value="ルート検索(Route Search)"></div>
+<h4>3. 一度ルート検索をしたら"ルートリセット"(Route Reset)ボタンを押してください。 </h4>
+<div><input type="button" onclick="onMakerDel()" value="ルートリセット(Route Reset)"></div>
+<h3>＜注意＞</h3>
+<h4>温泉マークをクリックしても、詳細情報が表示されるだけなので、地図を拡大して周辺地点をクリックしてください。</h4>
+<br/><br/>
+<h3><a href="javascript:history.back();">前のページに戻る</a></h3>
+
+<h3><a href="top.html">最初へ戻る</a></h3>
+
+<body bgcolor="#ffffec">
+
+<script>
+var map = L.map('map');
+
+//ルート検索用マーカーの配列
+var aryMakerLat = {};
+var aryMakerLon = {};
+//ルート検索用マーカーの添え数字
+var iMaker = -1;
+
+
+L.tileLayer('http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+  attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+}).addTo(map);
+map.setView([43.068603, 141.350460], 12);
+var pondIcon = [];
+iconName = [ 'pond/pond1.png', 'pond/pond2.png', 'pond/pond3.png' ];
+iconName.forEach(function (png) {
+	pondIcon.push(new L.Icon({
+    iconUrl: png,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, 0]
+	}))
+});
+var springs = [];
+var sapporoLayer = 
+omnivore.csv(
+  'sapporo_onsen_info.csv',
+  {latfield: 'onsen_latitude', lonfield: 'onsen_longitude', delimiter: ','}
+).on('ready', function(layer) {
+  this.eachLayer(function(marker) {
+	  springs.push( marker.toGeoJSON() );
+	  marker.setIcon(pondIcon[0]);
+    // Bind a popup to each icon based on the same properties
+    gj = marker.toGeoJSON();
+    marker.bindPopup("<a href='http://" + gj.properties.onsen_url + "' target='_blank'>" + gj.properties.onsen_name + "</a><br />" + gj.properties.onsen_address 
+      +"<br />営業時間 " + gj.properties.onsen_start + " - " + gj.properties.onsen_end + "<br />電話 : " + gj.properties.onsen_tel
+      +"<br />その他 : " + gj.properties.onsen_extra
+    );
+    });
+  })
+ .addTo(map);
+var hokkaidoLayer = 
+omnivore.csv(
+  'hokkaido_onsen_info.csv',
+  {latfield: 'onsen_latitude', lonfield: 'onsen_longitude', delimiter: ','}
+).on('ready', function(layer) {
+  this.eachLayer(function(marker) {
+	  marker.setIcon(pondIcon[1]);
+    // Bind a popup to each icon based on the same properties
+    marker.bindPopup(marker.toGeoJSON().properties.onsen_name);
+    });
+  })
+ .addTo(map);
+ 
+var markers;
+
+map.on('click', function(e) {
+    var latitude = (Math.round(e.latlng.lat * 10000)) /10000;  
+    var longitude = (Math.round(e.latlng.lng * 10000)) /10000; 
+
+    //マーカー追加
+	makers = L.marker([latitude　, longitude]).addTo(map);
+	iMaker++;
+	aryMakerLat[iMaker] = latitude;
+	aryMakerLon[iMaker] = longitude;
+});
+
+function routeDescribe()
+{
+	var tmpStr;
+	var tmpEnd;
+	
+	for(var i=0;i<iMaker+1;)
+	{
+		tmpStr = i;
+		tmpEnd = ++i;
+		
+	
+		L.Routing.control({
+		    waypoints: [
+		        L.latLng(aryMakerLat[tmpStr], aryMakerLon[tmpStr]),
+		        L.latLng(aryMakerLat[tmpEnd], aryMakerLon[tmpEnd])
+		    ],
+		}).addTo(map);
+	}
+}
+
+function onMakerDel() {
+    location.reload();
+}
+
+</script>
+
+</body>
+</html>
