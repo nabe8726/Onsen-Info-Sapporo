@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width">
 <title>Sapporo ONSEN Info. - 温泉マップ_札幌版</title>
 
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
@@ -27,10 +28,10 @@
 </head>
 
 <meta charset="utf-8">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="description" content="温泉マップ札幌　日本語版">
+<meta name="author" content="nabe8726">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="">
+<link rel="stylesheet" href="css/onsen_map_jp.css">
 <!--&#91;if lt IE 9&#93;>
 <script src="//cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -39,22 +40,22 @@
 </head>
 <body bgcolor="#ffffec">
 <h1>温泉マップ_札幌版</h1>
-
+<select id="seljr"></select>
+<button id="getnear">JR駅の近くでリスト表示</button>&nbsp;&nbsp;<br/><br/>
+<select id="selun"></select>
+<button id="getnear2">地下鉄駅の近くでリスト表示</button>&nbsp;&nbsp;<br/><br/>
+<button id="curnear">現在地の近くでリスト表示</button><br/><br/>
 <div id="map"></div>
 
 <h1>温泉情報リスト</h1>
 <h3>リスト上をクリックすると該当施設がわかり、アイコンをクリックすると詳しい情報を見ることができます。</h3>
-<select id="seljr"></select>
-<button id="getnear">JR駅の近くを取得</button>&nbsp;&nbsp;<br/><br/>
-<select id="selun"></select>
-<button id="getnear2">地下鉄駅の近くを取得</button>&nbsp;&nbsp;<br/><br/>
-<button id="curnear">現在地の近くを取得</button>
+
 
 <div id="list" style="width:100%;height:200px;"></div>
 <h3>行きたい温泉施設が決まったら《ルート検索》へ! </h3>
 <a class="link" href="route_search_jp.html"><h1>ルート検索！</h1></a>
 <h3><a href="javascript:history.back();">前のページに戻る</a></h3>
-
+<h3><a href="top.html">最初へ戻る</a></h3>
 <!-- SCRIPTS -->
 
 <script>

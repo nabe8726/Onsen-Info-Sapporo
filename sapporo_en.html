@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width">
 <title>Sapporo ONSEN Info. - Onsen Map Sapporo ver.</title>
 
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
@@ -24,10 +25,10 @@
 </head>
 
 <meta charset="utf-8">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="description" content="Sapporo ONSEN MAP English version ">
+<meta name="author" content="nabe8726">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="">
+<link rel="stylesheet" href="css/onsen_map_en.css">
 <!--&#91;if lt IE 9&#93;>
 <script src="//cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -37,7 +38,7 @@
 <body bgcolor="#ffffec">
 <h1>Sapporo ONSEN map</h1>
 
-<div id="map"></div>
+
 
 <h2>How to use it?</h2>
 1. Please choose one of station from "JR" or "Subway", and click the button next to each tab. Or Click "Current Location"</br></br>
@@ -45,16 +46,18 @@
 <br/><br/><br/>
 
 <select id="seljr"></select>
-<button id="getnear">Search from JR Line's Station</button>&nbsp;&nbsp;
+<button id="getnear">Search from JR Line's Station</button>&nbsp;&nbsp;<br/><br/>
 <select id="selun"></select>
-<button id="getnear2">Search from Subway Station</button>&nbsp;&nbsp;
-<button id="curnear">Search from Current Location</button>
-
+<button id="getnear2">Search from Subway Station</button>&nbsp;&nbsp;<br/><br/>
+<button id="curnear">Search from Current Location</button><br/><br/>
+<div id="map"></div>
+<h2>ONSEN facility's list</h2>
 <div id="list" style="width:100%;height:200px;"></div>
 <h3>If you have already decided an Onsen Facility, please click "Go to Route Search"! </h3>
 <h1><a class="link" href="route_search_en.html">Go to Route Search</a></h1>
 <h3><a href="javascript:history.back();">Return</a></h3>
 
+<h3><a href="top.html">Go Top Page</a></h3>
 <!-- SCRIPTS -->
 
 <script>
