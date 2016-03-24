@@ -151,7 +151,9 @@ function getNearestMarkers( targets, count, currentLocation ) {
   ];
   var options = {
     enableCellNavigation: true,
-    enableColumnReorder: false
+    enableColumnReorder: false,
+    selectedCellCssClass: "selected",
+    
   };
 
  var circleMarker = L.circleMarker([0,0],{
